@@ -1,0 +1,57 @@
+#highscore {
+    font-size: 40px;
+    padding: 50px;
+    padding-bottom: 0px;
+    text-align: center;
+}
+
+#timer {
+    font-size: 40px;
+    padding: 50px;
+    padding-bottom: 0px;
+    text-align: center;
+}
+
+#welcome {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 100px;
+    width: 50%;
+    margin: auto;
+    padding: 50px;
+    text-align: center;
+}
+
+#welcome h1 {
+    margin-bottom: 5px;
+}
+
+#welcome h2 {
+    font-size: 40px;
+    margin-bottom: 5px;
+}
+
+#button {
+    font-size: 35px;
+    color: white;
+    background-color: purple;
+    padding: 15px;
+    text-align: center;
+}
+
+#quiz {
+    font-size: 40px;
+    padding: 10px;
+    text-align: center;
+    margin: auto;
+    width: 50%;
+}
+
+#theQuestion {
+    margin: 75px;
+}
+
+#orderedList {
+    font-size: 40px;
+    padding: 10px;
+    text-align: center;
+}
