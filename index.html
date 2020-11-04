@@ -16,7 +16,7 @@
         <!--Highscore and Timer row-->
         <div class="row">
             <div class="col-md-6 col-sm-12">
-                <div id="highscore">Highscore</div>
+                <div id="currentScore">Score</div>
             </div>
             <div class="col-md-6 col-sm-12">
                 <div id="timer">Timer</div>
@@ -44,10 +44,10 @@
             <!--The answers-->
             <div class="col-md-12 col-sm-12">
                 <ol id="orderedList">
-                    <li id="answer1"></li>
-                    <li id="answer2"></li>
-                    <li id="answer3"></li>
-                    <li id="answer4"></li>
+                    <li id="answer1" class="answerClass" data-index=0></li>
+                    <li id="answer2" class="answerClass" data-index=1></li>
+                    <li id="answer3" class="answerClass" data-index=2></li>
+                    <li id="answer4" class="answerClass" data-index=3></li>
                 </ol>
             </div>
             <!--Grade-->
@@ -58,7 +58,7 @@
 
         <!--Game Over-->
         <section class="row">
-            <div class="hide" id="gameover">
+            <div id="gameover">
                 <div class="col-md-12 col-sm-12">
                     <h2>Game Over</h2>
                     <h3>Your score is <span id="final-score">0</span></h3>
@@ -68,6 +68,14 @@
                 </div>
             </div>
         </section>
+
+        <!--Highscores-->
+        <div>
+
+            <!--Play Again-->
+
+        </div>
+
 
 
     </div>

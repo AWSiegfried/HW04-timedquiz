@@ -1,4 +1,4 @@
-#highscore {
+#currentScore {
     font-size: 40px;
     padding: 50px;
     padding-bottom: 0px;
@@ -54,4 +54,13 @@
     font-size: 40px;
     padding: 10px;
     text-align: center;
+}
+
+#gameover {
+    display: none;
+    font-size: 40px;
+    padding: 10px;
+    text-align: center;
+    margin: auto;
+    width: 50%;
 }
