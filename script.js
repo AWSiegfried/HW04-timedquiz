@@ -13,8 +13,11 @@ var answer4 = document.querySelector("#answer4");
 var finalScore = document.querySelector("#final-score");
 var answers = document.querySelectorAll(".answerClass")
 var currentQuestion = document.querySelector("#theQuestion");
-var gameover = document.querySelector("#gameover")
-
+var gameover = document.querySelector("#gameover");
+var submitButton = document.querySelector("#submit-button");
+var initialsInput = document.querySelector("#initials");
+var theLeaderboard = document.querySelector("#theleaderboard");
+var scores = document.querySelector("#highscores");
 
 
 //Gamestate variables
@@ -50,10 +53,14 @@ function askQuestions() {
             timerSent.textContent = timer + " seconds left";
             timer--;
 
-            if (timer <= 0) {
+            if (timer === 0) {
                 clearInterval(timerInterval);
-                //End Game (state Game Over, go to results page)
-                sendMessage();
+                //End Game (state Game Over, go to results page), but if gameover has already  happened, don't do it
+                if (gameover.style.display = "none") {
+                    return;
+                } else {
+                    sendMessage();
+                }
             }
         }, 1000);
     }
@@ -62,7 +69,6 @@ function askQuestions() {
         welcome.style.display = "none";
         gameover.style.display = "block";
         finalScore.textContent = score;
-        console.log(score)
     }
 
 
@@ -73,7 +79,6 @@ function askQuestions() {
     function click(event) {
         event.preventDefault();
         event.stopPropagation();
-        console.log(this);
         var answerIndex = this.dataset.index;
         //Declare right or wrong by comparing answer in question object to clicked choice
         if (answerIndex === questions[thisQuestion].answer) {
@@ -104,16 +109,13 @@ function askQuestions() {
     }
 
     function rerender() {
-        console.log(thisQuestion)
-            //Present Score
+        //Present Score
         currentScore.textContent = "Score: " + score;
 
         //Present questions
         currentQuestion.textContent = questions[thisQuestion].thequestion;
 
-
         //Present 4 potential answers
-
         for (let index = 0; index < answers.length; index++) {
             var element = answers[index];
             element.textContent = questions[thisQuestion].options[index]
@@ -124,7 +126,6 @@ function askQuestions() {
             element.addEventListener("click", click);
         }
     }
-    //Highscore Page
 }
 
 //Start Game
@@ -135,4 +136,31 @@ button.addEventListener("click", function(event) {
     welcome.style.display = "none";
     //Begin quiz
     askQuestions();
+});
+
+//Submit initals/answer
+submitButton.addEventListener("click", function() {
+    //Get input
+    var initials = initialsInput.value.trim();
+
+    // If empty don't run, else 
+    if (initials !== "") {
+        // Pull from localstorage or set to empty array
+        var leaderboard = JSON.parse(window.localStorage.getItem("leaderboard")) || [];
+
+        // Create new score that includes initials
+        var newScore = document.createElement("li");
+        newScore = initials + " " + score;
+        console.log(newScore);
+
+        // save to localstorage
+        leaderboard.push(newScore.textContent);
+        window.localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+
+        // Show leaderboard
+        theLeaderboard.append(newScore);
+        gameover.style.display = "none";
+        theLeaderboard.style.display = "block";
+    }
+
 });

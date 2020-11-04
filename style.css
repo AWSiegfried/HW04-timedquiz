@@ -64,3 +64,12 @@
     margin: auto;
     width: 50%;
 }
+
+#theleaderboard {
+    display: none;
+    font-size: 40px;
+    padding: 10px;
+    text-align: center;
+    margin: auto;
+    width: 50%;
+}
