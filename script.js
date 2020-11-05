@@ -25,6 +25,7 @@ var scores = document.querySelector("#highscores");
 var thisQuestion = 0;
 var timer = 60;
 var score = 0;
+var isGameOver = false
 
 //Array of questions
 var questions = [{
@@ -79,6 +80,7 @@ function askQuestions() {
     function gameOver() {
         quiz.style.display = "none";
         gameover.style.display = "block";
+        currentScore.textContent = "Your Score: " + score;
         finalScore.textContent = score;
     }
 
@@ -115,6 +117,7 @@ function askQuestions() {
 
     // Ask questions
     function rerender() {
+
         //Present Score
         currentScore.textContent = "Your Score: " + score;
 
