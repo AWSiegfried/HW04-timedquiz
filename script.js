@@ -19,12 +19,11 @@ var initialsInput = document.querySelector("#initials");
 var theLeaderboard = document.querySelector("#theleaderboard");
 var scores = document.querySelector("#highscores");
 
-var players = [];
 
 
 //Gamestate variables
 var thisQuestion = 0;
-var timer = 6;
+var timer = 60;
 var score = 0;
 
 //Array of questions
@@ -71,13 +70,13 @@ function askQuestions() {
                 if (quiz.style.display === "none" || gameover.style.display === "none") {
                     return;
                 } else {
-                    sendMessage();
+                    gameOver();
                 }
             }
         }, 1000);
     }
 
-    function sendMessage() {
+    function gameOver() {
         quiz.style.display = "none";
         gameover.style.display = "block";
         finalScore.textContent = score;
@@ -107,7 +106,7 @@ function askQuestions() {
             grade.textContent = "";
             thisQuestion++;
             if (thisQuestion === questions.length) {
-                sendMessage();
+                gameOver();
             } else {
                 rerender();
             }
@@ -119,7 +118,7 @@ function askQuestions() {
     // Ask questions
     function rerender() {
         //Present Score
-        currentScore.textContent = "Score: " + score;
+        currentScore.textContent = "Your Score: " + score;
 
         //Present questions
         currentQuestion.textContent = questions[thisQuestion].thequestion;
@@ -136,45 +135,38 @@ function askQuestions() {
         }
     }
 
-    //Generate new score
+    //Generate new score.
     submitButton.addEventListener("click", function() {
         var initials = initialsInput.value.trim();
-        var newScore = document.createElement("li");
-        newScore.textContent = initials + " " + score;
-        console.log(newScore)
-
-        var scoreSaved = JSON.parse(window.localStorage.getItem("newScore"));
-        if (scoreSaved !== null) {
-            newScore = scoreSaved;
+        var scoreSaved = JSON.parse(window.localStorage.getItem("scoreSaved"));
+        var nameSaved = JSON.parse(window.localStorage.getItem("nameSaved"));
+        if (scoreSaved === null || score > scoreSaved) {
+            scoreSaved = score;
+            nameSaved = initials;
         }
+
+        saveScore();
 
         //Render score history
         function renderScore() {
-            scores.innerHTML = "";
-            for (var i = 0; i < players.length; i++) {
-                var player = players[i];
+            // Show leaderboard
+            var displayedHighscore = document.createElement("li");
+            displayedHighscore.textContent = nameSaved + " : " + scoreSaved + " points!"
 
-                var li = document.createElement("li");
-                li.textContent = player;
-
-                scores.appendChild(li);
-                saveScore();
-            }
+            theLeaderboard.append(displayedHighscore);
+            gameover.style.display = "none";
+            theLeaderboard.style.display = "block";
         }
 
         //Save score
         function saveScore() {
-            if (players !== null) {
-                window.localStorage.setItem("scoreSaved", JSON.stringify(newScore));
-            };
+            window.localStorage.setItem("scoreSaved", JSON.stringify(scoreSaved));
+            window.localStorage.setItem("nameSaved", JSON.stringify(nameSaved));
         };
 
         renderScore();
 
-        // Show leaderboard
-        theLeaderboard.append(newscore);
-        gameover.style.display = "none";
-        theLeaderboard.style.display = "block";
+
 
     })
 }
@@ -189,8 +181,33 @@ button.addEventListener("click", function(event) {
     askQuestions();
 });
 
+// //Submit initals/answer
+// submitButton.addEventListener("click", function() {
+//     //Get input
+//     var initials = initialsInput.value.trim();
 
+//     // If empty don't run, else 
+//     if (initials !== "") {
 
+//         // Pull from localstorage or set to an empty array
+//         var leaderboard = JSON.parse(window.localStorage.getItem("leaderboard")) || [];
+
+//         // Create new score that includes initials
+//         var newScore = document.createElement("li");
+//         newScore = initials + " " + score;
+//         console.log(newScore);
+
+//         // save to localstorage
+//         leaderboard.push(newScore.textContent);
+//         window.localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+
+//         // Show leaderboard
+//         theLeaderboard.append(newScore);
+//         gameover.style.display = "none";
+//         theLeaderboard.style.display = "block";
+//     }
+
+// });
 
 
 

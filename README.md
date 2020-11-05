@@ -1,6 +1,7 @@
 ### HW04-timedquiz
 
 ## Overview
+The purpose of this assignment was to build a timed coding qui
 
 ## Used Appllications
 1. CSS Reset - https://meyerweb.com/eric/tools/css/reset/
