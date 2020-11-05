@@ -17,6 +17,10 @@ Overall, I'd say this homework gave me the hardest time of the completed assignm
 ## Used Appllications
 1. CSS Reset - https://meyerweb.com/eric/tools/css/reset/
 
+## Links
+Github - https://github.com/AWSiegfried/HW04-timedquiz
+Link to game - https://awsiegfried.github.io/HW04-timedquiz/
+
 ## PsuedoCode
 1. Page opens and shows leaderboard, timer, welcome message with start button.
 2. When "start quiz" is clicked each question and possible answers are shown.
