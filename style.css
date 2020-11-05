@@ -48,7 +48,8 @@
 }
 
 #theQuestion {
-    margin: 75px;
+    margin: 50px;
+    margin-bottom: 10px;
 }
 
 #orderedList {
@@ -73,4 +74,28 @@
     text-align: center;
     margin: auto;
     width: 50%;
+}
+
+#answer1 {
+    margin: 20px;
+    background-color: purple;
+    color: white;
+}
+
+#answer2 {
+    margin: 20px;
+    background-color: purple;
+    color: white;
+}
+
+#answer3 {
+    margin: 20px;
+    background-color: purple;
+    color: white;
+}
+
+#answer4 {
+    margin: 20px;
+    background-color: purple;
+    color: white;
 }

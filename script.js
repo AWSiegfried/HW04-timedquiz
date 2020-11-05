@@ -19,28 +19,34 @@ var initialsInput = document.querySelector("#initials");
 var theLeaderboard = document.querySelector("#theleaderboard");
 var scores = document.querySelector("#highscores");
 
+var players = [];
+
 
 //Gamestate variables
 var thisQuestion = 0;
-var timer = 60;
+var timer = 6;
 var score = 0;
 
 //Array of questions
 var questions = [{
-    thequestion: "Do you like pigs?",
-    options: ["Heck yes", "Goopen No", "Big friggin yessir", "Hate that guy"],
+    thequestion: "Which of these data types IS NOT supported by JavaScript",
+    options: ["Null", "Boolean", "Alert", "String"],
+    answer: "2",
+}, {
+    thequestion: "What selector is the # symbol used to specify?",
+    options: ["ID", "Class", "<P>", "<Div>"],
+    answer: "0",
+}, {
+    thequestion: "When linking your Javascript page, where do you place the link?",
+    options: ["Header", "End of Body", "Somewhere in the middle", "Doesn't Matter"],
     answer: "1",
 }, {
-    thequestion: "Do you like anime?",
-    options: ["Heck yes", "Goopen No", "Big friggin yessir", "Hate that guy"],
-    answer: "1",
+    thequestion: "Which of these symbols represents the 'or' function?",
+    options: ["&&", "===", "++", "||"],
+    answer: "3",
 }, {
-    thequestion: "Are you the reincarnated ghost of Ghengis Khan?",
-    options: ["Heck yes", "Goopen No", "Big friggin yessir", "Hate that guy"],
-    answer: "1",
-}, {
-    thequestion: "What does Pot of Greed do?",
-    options: ["Heck yes", "Goopen No", "Big friggin yessir", "Hate that guy"],
+    thequestion: "Which of these is the outermost feature in the box model?",
+    options: ["Padding", "Margin", "Border", "Content"],
     answer: "1",
 }];
 
@@ -49,6 +55,9 @@ function askQuestions() {
 
     //Show quiz
     quiz.style.display = "block";
+
+    startTimer();
+    rerender();
 
     //Start timer
     function startTimer() {
@@ -74,11 +83,7 @@ function askQuestions() {
         finalScore.textContent = score;
     }
 
-
-    startTimer();
-    rerender();
-
-    //Make them clickable
+    //Makes questions clickable
     function click(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -108,8 +113,10 @@ function askQuestions() {
             }
         }, 1000);
 
+
     }
 
+    // Ask questions
     function rerender() {
         //Present Score
         currentScore.textContent = "Score: " + score;
@@ -128,6 +135,48 @@ function askQuestions() {
             element.addEventListener("click", click);
         }
     }
+
+    //Generate new score
+    submitButton.addEventListener("click", function() {
+        var initials = initialsInput.value.trim();
+        var newScore = document.createElement("li");
+        newScore.textContent = initials + " " + score;
+        console.log(newScore)
+
+        var scoreSaved = JSON.parse(window.localStorage.getItem("newScore"));
+        if (scoreSaved !== null) {
+            newScore = scoreSaved;
+        }
+
+        //Render score history
+        function renderScore() {
+            scores.innerHTML = "";
+            for (var i = 0; i < players.length; i++) {
+                var player = players[i];
+
+                var li = document.createElement("li");
+                li.textContent = player;
+
+                scores.appendChild(li);
+                saveScore();
+            }
+        }
+
+        //Save score
+        function saveScore() {
+            if (players !== null) {
+                window.localStorage.setItem("scoreSaved", JSON.stringify(newScore));
+            };
+        };
+
+        renderScore();
+
+        // Show leaderboard
+        theLeaderboard.append(newscore);
+        gameover.style.display = "none";
+        theLeaderboard.style.display = "block";
+
+    })
 }
 
 //Start Game
@@ -140,30 +189,35 @@ button.addEventListener("click", function(event) {
     askQuestions();
 });
 
-//Submit initals/answer
-submitButton.addEventListener("click", function() {
-    //Get input
-    var initials = initialsInput.value.trim();
 
-    // If empty don't run, else 
-    if (initials !== "") {
 
-        // Pull from localstorage or set to an empty array
-        var leaderboard = JSON.parse(window.localStorage.getItem("leaderboard")) || [];
 
-        // Create new score that includes initials
-        var newScore = document.createElement("li");
-        newScore = initials + " " + score;
-        console.log(newScore);
 
-        // save to localstorage
-        leaderboard.push(newScore.textContent);
-        window.localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
 
-        // Show leaderboard
-        theLeaderboard.append(newScore);
-        gameover.style.display = "none";
-        theLeaderboard.style.display = "block";
-    }
 
-});
+
+
+// //Get input
+// var initials = initialsInput.value.trim();
+
+// var newScore = document.createElement("li");
+// newScore.textContent = initials + " " + score;
+
+// // Create new score that includes initials
+// var newScore = document.createElement("li");
+// newScore.textContent = initials + " " + score;
+// console.log(newScore);
+
+// // Pull from localstorage or set to an empty array
+// var leaderboard = JSON.parse(localStorage.getItem(newScore)) || [];
+// console.log(leaderboard)
+
+// // save to localstorage
+// leaderboard.push(newScore);
+// localStorage.setItem("newScore", JSON.stringify(leaderboard));
+// console.log(leaderboard)
+
+// // Show leaderboard
+// theLeaderboard.append(leaderboard);
+// gameover.style.display = "none";
+// theLeaderboard.style.display = "block";
