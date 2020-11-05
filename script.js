@@ -89,7 +89,6 @@ function askQuestions() {
         var answerIndex = this.dataset.index;
         //Declare right or wrong by comparing answer in question object to clicked choice
         if (answerIndex === questions[thisQuestion].answer) {
-            //Going to have to add time here
             grade.textContent = "Zip Zap Correct Is That"
             score += 10;
             timer += 5;
@@ -97,6 +96,7 @@ function askQuestions() {
             grade.textContent = "Boom Bammed Shoulda Crammed"
             timer -= 10;
         }
+
         //Clear old question 
         answers.forEach(function(answer) {
             answer.textContent = "";
@@ -111,8 +111,6 @@ function askQuestions() {
                 rerender();
             }
         }, 1000);
-
-
     }
 
     // Ask questions
@@ -128,7 +126,6 @@ function askQuestions() {
             var element = answers[index];
             element.textContent = questions[thisQuestion].options[index]
         }
-
         for (let index = 0; index < answers.length; index++) {
             var element = answers[index];
             element.addEventListener("click", click);
@@ -150,8 +147,8 @@ function askQuestions() {
         //Render score history
         function renderScore() {
             // Show leaderboard
-            var displayedHighscore = document.createElement("li");
-            displayedHighscore.textContent = nameSaved + " : " + scoreSaved + " points!"
+            var displayedHighscore = document.createElement("p");
+            displayedHighscore.textContent = nameSaved + " : " + scoreSaved + " points"
 
             theLeaderboard.append(displayedHighscore);
             gameover.style.display = "none";
@@ -180,61 +177,3 @@ button.addEventListener("click", function(event) {
     //Begin quiz
     askQuestions();
 });
-
-// //Submit initals/answer
-// submitButton.addEventListener("click", function() {
-//     //Get input
-//     var initials = initialsInput.value.trim();
-
-//     // If empty don't run, else 
-//     if (initials !== "") {
-
-//         // Pull from localstorage or set to an empty array
-//         var leaderboard = JSON.parse(window.localStorage.getItem("leaderboard")) || [];
-
-//         // Create new score that includes initials
-//         var newScore = document.createElement("li");
-//         newScore = initials + " " + score;
-//         console.log(newScore);
-
-//         // save to localstorage
-//         leaderboard.push(newScore.textContent);
-//         window.localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
-
-//         // Show leaderboard
-//         theLeaderboard.append(newScore);
-//         gameover.style.display = "none";
-//         theLeaderboard.style.display = "block";
-//     }
-
-// });
-
-
-
-
-
-
-// //Get input
-// var initials = initialsInput.value.trim();
-
-// var newScore = document.createElement("li");
-// newScore.textContent = initials + " " + score;
-
-// // Create new score that includes initials
-// var newScore = document.createElement("li");
-// newScore.textContent = initials + " " + score;
-// console.log(newScore);
-
-// // Pull from localstorage or set to an empty array
-// var leaderboard = JSON.parse(localStorage.getItem(newScore)) || [];
-// console.log(leaderboard)
-
-// // save to localstorage
-// leaderboard.push(newScore);
-// localStorage.setItem("newScore", JSON.stringify(leaderboard));
-// console.log(leaderboard)
-
-// // Show leaderboard
-// theLeaderboard.append(leaderboard);
-// gameover.style.display = "none";
-// theLeaderboard.style.display = "block";
