@@ -1,5 +1,5 @@
 // DOM element variables
-var quiz = document.querySelector("#main");
+var quiz = document.querySelector("#quiz");
 var orderedList = document.querySelector("#orderedList");
 var welcome = document.querySelector("#welcome");
 var timerSent = document.querySelector("#timer");
@@ -29,34 +29,37 @@ var score = 0;
 var questions = [{
     thequestion: "Do you like pigs?",
     options: ["Heck yes", "Goopen No", "Big friggin yessir", "Hate that guy"],
-    answer: "3",
+    answer: "1",
 }, {
     thequestion: "Do you like anime?",
     options: ["Heck yes", "Goopen No", "Big friggin yessir", "Hate that guy"],
-    answer: "3",
+    answer: "1",
 }, {
     thequestion: "Are you the reincarnated ghost of Ghengis Khan?",
     options: ["Heck yes", "Goopen No", "Big friggin yessir", "Hate that guy"],
-    answer: "3",
+    answer: "1",
 }, {
     thequestion: "What does Pot of Greed do?",
     options: ["Heck yes", "Goopen No", "Big friggin yessir", "Hate that guy"],
-    answer: "3",
+    answer: "1",
 }];
 
 //For loop cycling through each question.
 function askQuestions() {
 
+    //Show quiz
+    quiz.style.display = "block";
+
     //Start timer
     function startTimer() {
         var timerInterval = setInterval(function() {
-            timerSent.textContent = timer + " seconds left";
             timer--;
+            timerSent.textContent = timer + " seconds left";
 
-            if (timer === 0) {
+            if (timer <= 0 || gameover.style.display === "block") {
                 clearInterval(timerInterval);
                 //End Game (state Game Over, go to results page), but if gameover has already  happened, don't do it
-                if (gameover.style.display = "none") {
+                if (quiz.style.display === "none" || gameover.style.display === "none") {
                     return;
                 } else {
                     sendMessage();
@@ -66,7 +69,7 @@ function askQuestions() {
     }
 
     function sendMessage() {
-        welcome.style.display = "none";
+        quiz.style.display = "none";
         gameover.style.display = "block";
         finalScore.textContent = score;
     }
@@ -104,7 +107,6 @@ function askQuestions() {
                 rerender();
             }
         }, 1000);
-        // clearTimeout(timeId)
 
     }
 
@@ -145,7 +147,8 @@ submitButton.addEventListener("click", function() {
 
     // If empty don't run, else 
     if (initials !== "") {
-        // Pull from localstorage or set to empty array
+
+        // Pull from localstorage or set to an empty array
         var leaderboard = JSON.parse(window.localStorage.getItem("leaderboard")) || [];
 
         // Create new score that includes initials
