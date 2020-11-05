@@ -19,6 +19,7 @@ Overall, I'd say this homework gave me the hardest time of the completed assignm
 
 ## Links
 Github - https://github.com/AWSiegfried/HW04-timedquiz
+
 Link to game - https://awsiegfried.github.io/HW04-timedquiz/
 
 ## PsuedoCode
