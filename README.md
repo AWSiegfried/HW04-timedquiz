@@ -17,6 +17,14 @@ Overall, I'd say this homework gave me the hardest time of the completed assignm
 ## Used Appllications
 1. CSS Reset - https://meyerweb.com/eric/tools/css/reset/
 
+### Screenshot
+![screenshot1](/Assets/timedquiz1.png?raw=true)
+![screenshot2](/Assets/timedquiz2.png?raw=true)
+![screenshot3](/Assets/timedquiz3.png?raw=true)
+![screenshot4](/Assets/timedquiz4.png?raw=true)
+
+
+
 ## Links
 Github - https://github.com/AWSiegfried/HW04-timedquiz
 
